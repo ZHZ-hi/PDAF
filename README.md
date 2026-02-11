@@ -1,4 +1,4 @@
-## Exploring Probabilistic Modeling Beyond Domain Generalization for Semantic Segmentation
+## PDAF: Exploring Probabilistic Modeling Beyond Domain Generalization for Semantic Segmentation
 
 Official repository for Exploring Probabilistic Modeling Beyond Domain Generalization for Semantic Segmentation
 
@@ -31,10 +31,11 @@ This project retains the original BSD 3-Clause License terms.
 ## Reference
 If you find this work useful, please consider citing us!
 ```
-@article{chen2025exploring,
+}@inproceedings{chen2025exploring,
   title={Exploring Probabilistic Modeling Beyond Domain Generalization for Semantic Segmentation},
   author={Chen, I and Chang, Hua-En and Chen, Wei-Ting and Hwang, Jenq-Neng and Kuo, Sy-Yen and others},
-  journal={arXiv preprint arXiv:2507.21367},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={21755--21765},
   year={2025}
 }
 ```
