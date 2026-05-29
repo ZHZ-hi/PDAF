@@ -1,0 +1,72 @@
+seed: 42
+output_dir: outputs/unet_pdaf_v2
+
+data:
+  root: data/CHASE_DB1
+  val_split: val
+  patch_size: 256
+  steps_per_epoch: 100
+  batch_size: 4
+  num_workers: 0
+
+model:
+  in_channels: 3
+  out_channels: 1
+  base_channels: 32
+  prior_channels: 4
+  condition_layers: [layer4]
+  condition_reference: layer4
+  insert_layers: [layer4]
+  dcm_modulation_scale: 0.1
+  lpe_hidden_channels: 32
+  lpe_blocks: 4
+  dpe_hidden_channels: 32
+  dpe_blocks: 3
+  timesteps: 4
+  beta_start: 0.1
+  beta_end: 0.99
+
+augmentation:
+  brightness: 0.3
+  contrast: 0.3
+  saturation: 0.2
+  hue: 0.02
+  blur_kernel: 5
+  blur_sigma: [0.1, 1.5]
+  blur_prob: 0.2
+  noise_std: 0.03
+  gamma_range: [0.7, 1.5]
+  vignette_strength: [0.15, 0.4]
+  channel_shift: 0.06
+  low_freq_bias: 0.10
+
+teacher:
+  epochs: 15
+  lr: 0.001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0
+
+pdaf:
+  epochs: 80
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0
+  augmentor: retinal
+  lambda_task: 0.5
+  lambda_sc: 0.3
+  lambda_kl: 0.05
+  lambda_prior: 0.1
+  lambda_distill: 0.5
+  prior_warmup_epochs: 10
+  grad_clip_norm: 0.5
+  dpe_start_epoch: 3
+  prior_mode_lpe_grad: true
+  dpe_dual_mode: false
+  patience: 15
+
+distill:
+  epochs: 60
+  lr: 0.0002
+  lambda_task: 1.0
+  lambda_distill: 0.5
+  patience: 15
